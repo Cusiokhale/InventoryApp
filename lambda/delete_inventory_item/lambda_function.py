@@ -1,11 +1,9 @@
 import boto3
 import json
-from boto3.dynamodb.conditions import Key
-import os
+from boto3.dynamodb.conditions import Attr
 
 dynamodb = boto3.resource('dynamodb')
-TABLE_NAME = os.getenv('TABLE_NAME', 'Inventory')  # default table name
-table = dynamodb.Table(TABLE_NAME)
+table = dynamodb.Table('Inventory')
 
 def lambda_handler(event, context):
     # Validate path parameter
@@ -19,10 +17,11 @@ def lambda_handler(event, context):
         }
 
     try:
-        # Query using PK (Id)
-        response = table.query(
-            KeyConditionExpression=Key('id').eq(key_value)
+        # Scan the table to find the item by id
+        response = table.scan(
+            FilterExpression=Attr('id').eq(key_value)
         )
+
         items = response.get('Items', [])
 
         if not items:
@@ -31,12 +30,11 @@ def lambda_handler(event, context):
                 'body': json.dumps('Item not found')
             }
 
-        # Delete each item using full PK + SK
         for item in items:
             table.delete_item(
                 Key={
-                    'id': item['id'],                   # PK
-                    'location_id': item['location_id']   # SK
+                    'location_id': item['location_id'],  # PK
+                    'id': item['id']                      # SK
                 }
             )
 
