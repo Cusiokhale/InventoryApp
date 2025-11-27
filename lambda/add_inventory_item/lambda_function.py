@@ -55,7 +55,7 @@ def lambda_handler(event, context):
         return {
             "statusCode": 200,
             "body": json.dumps(
-                f"Item with ID {item_id} added successfully to location {item['LocationId']}."
+                f"Item with ID {item_id} added successfully to location {item['location_id']}."
             )
         }
     except Exception as e:
