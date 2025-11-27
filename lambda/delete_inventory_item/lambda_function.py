@@ -21,7 +21,7 @@ def lambda_handler(event, context):
     try:
         # Query using PK (Id)
         response = table.query(
-            KeyConditionExpression=Key('Id').eq(key_value)
+            KeyConditionExpression=Key('id').eq(key_value)
         )
         items = response.get('Items', [])
 
