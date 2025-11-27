@@ -41,12 +41,12 @@ def lambda_handler(event, context):
 
     # 4. Build the DynamoDB item
     item = {
-        "ItemId": item_id,                       
-        "LocationId": str(data["location_id"]),  
-        "ItemName": data["name"],
-        "ItemDescription": data["description"],
-        "QtyOnHand": int(data["qty"]),
-        "ItemPrice": Decimal(str(data["price"])) 
+        "id": item_id,                       
+        "location_id": str(data["location_id"]),  
+        "name": data["name"],
+        "description": data["description"],
+        "qty": int(data["qty"]),
+        "price": Decimal(str(data["price"])) 
     }
 
     # 5. Insert into DynamoDB
