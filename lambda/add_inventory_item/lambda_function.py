@@ -22,10 +22,10 @@ def lambda_handler(event, context):
 
     # 2. Validate required fields
     required_fields = [
-        "item_name",
-        "item_description",
-        "qty_on_hand",
-        "item_price",
+        "name",
+        "description",
+        "qty",
+        "price",
         "location_id"
     ]
 
