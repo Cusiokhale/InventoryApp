@@ -43,10 +43,10 @@ def lambda_handler(event, context):
     item = {
         "ItemId": item_id,                          # PK (string, UUID4)
         "LocationId": int(data["location_id"]),     # SK (integer)
-        "ItemName": data["item_name"],
-        "ItemDescription": data["item_description"],
-        "QtyOnHand": int(data["qty_on_hand"]),
-        "ItemPrice": float(data["item_price"])
+        "ItemName": data["name"],
+        "ItemDescription": data["description"],
+        "QtyOnHand": int(data["qty"]),
+        "ItemPrice": float(data["price"])
     }
 
     # 5. Insert into DynamoDB
