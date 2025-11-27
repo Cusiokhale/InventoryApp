@@ -21,8 +21,8 @@ def lambda_handler(event, context):
 
     # Query using PK only (Id) instead of get_item
     try:
-        response = table.query(
-            KeyConditionExpression=Key('Id').eq(key_value)
+        response = table_name.query(
+            KeyConditionExpression=Key('id').eq(key_value)
         )
         items = response.get('Items', [])
 

@@ -9,8 +9,8 @@ import os
 dynamodb = boto3.resource('dynamodb')
 
 # Table and index names
-TABLE_NAME = os.getenv('TABLE_NAME', 'inventory')   # default to 'inventory'
-GSI_NAME = 'locationInventoryItems'                 # GSI name
+TABLE_NAME = os.getenv('TABLE_NAME', 'Inventory')  
+GSI_NAME = 'locationInventoryItems'                
 
 # Function to convert Decimal to int/float for JSON
 def convert_decimals(obj):
@@ -33,13 +33,13 @@ def lambda_handler(event, context):
             'body': json.dumps("Missing 'id' path parameter")
         }
 
-    # location_id from path (e.g., /inventory/location/3)
+    # location_id from path 
     try:
-        location_id = int(path_params['id'])  # assuming location_id is stored as a number
+        location_id = (path_params['id'])  
     except ValueError:
         return {
             'statusCode': 400,
-            'body': json.dumps("Path parameter 'id' must be an integer")
+            'body': json.dumps("Path parameter 'id' must be valid")
         }
 
     try:
