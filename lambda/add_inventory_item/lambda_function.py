@@ -1,7 +1,7 @@
 import json
 import boto3
 import os
-import uuid  # using uuid4 for ItemId
+import uuid  # using uuid4
 
 # Set up DynamoDB resource and table
 dynamodb = boto3.resource('dynamodb')
