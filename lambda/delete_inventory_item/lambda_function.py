@@ -4,7 +4,7 @@ from boto3.dynamodb.conditions import Key
 import os
 
 dynamodb = boto3.resource('dynamodb')
-TABLE_NAME = os.getenv('TABLE_NAME', 'inventory')  # default table name
+TABLE_NAME = os.getenv('TABLE_NAME', 'Inventory')  # default table name
 table = dynamodb.Table(TABLE_NAME)
 
 def lambda_handler(event, context):
@@ -35,7 +35,7 @@ def lambda_handler(event, context):
         for item in items:
             table.delete_item(
                 Key={
-                    'Id': item['Id'],                   # PK
+                    'id': item['id'],                   # PK
                     'location_id': item['location_id']   # SK
                 }
             )
