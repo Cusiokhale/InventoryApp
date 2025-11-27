@@ -3,6 +3,7 @@ import boto3
 import os
 import uuid  # using uuid4
 
+
 # Set up DynamoDB resource and table
 dynamodb = boto3.resource('dynamodb')
 TABLE_NAME = os.getenv('TABLE_NAME', 'inventory')  # default to 'inventory'
