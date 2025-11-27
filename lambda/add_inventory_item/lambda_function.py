@@ -42,7 +42,7 @@ def lambda_handler(event, context):
     # 4. Build the DynamoDB item
     item = {
         "ItemId": item_id,                          # PK (string, UUID4)
-        "LocationId": int(data["location_id"]),     # SK (integer)
+        "LocationId": (data["location_id"]),     # SK (integer)
         "ItemName": data["name"],
         "ItemDescription": data["description"],
         "QtyOnHand": int(data["qty"]),
