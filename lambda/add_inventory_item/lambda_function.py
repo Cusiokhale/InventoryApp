@@ -2,17 +2,17 @@ import json
 import boto3
 import os
 import uuid  # using uuid4
-
+from decimal import Decimal  
 
 # Set up DynamoDB resource and table
 dynamodb = boto3.resource('dynamodb')
-TABLE_NAME = os.getenv('TABLE_NAME', 'inventory')  # default to 'inventory'
+TABLE_NAME = os.getenv('TABLE_NAME', 'Inventory') 
 table = dynamodb.Table(TABLE_NAME)
 
 def lambda_handler(event, context):
     # 1. Parse incoming JSON body
     try:
-        body = event.get('body', '{}')  # API Gateway sends body as a string
+        body = event.get('body', '{}') 
         data = json.loads(body)
     except (TypeError, json.JSONDecodeError):
         return {
@@ -41,12 +41,12 @@ def lambda_handler(event, context):
 
     # 4. Build the DynamoDB item
     item = {
-        "ItemId": item_id,                          # PK (string, UUID4)
-        "LocationId": (data["location_id"]),     # SK (integer)
+        "ItemId": item_id,                       
+        "LocationId": str(data["location_id"]),  
         "ItemName": data["name"],
         "ItemDescription": data["description"],
         "QtyOnHand": int(data["qty"]),
-        "ItemPrice": float(data["price"])
+        "ItemPrice": Decimal(str(data["price"])) 
     }
 
     # 5. Insert into DynamoDB
